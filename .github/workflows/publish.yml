@@ -31,17 +31,3 @@ jobs:
           context: .
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-
-  notify-slack:
-    # Always runs, but the payload depends on success/failure
-    runs-on: ubuntu-latest
-    if: ${{ failure() }}  # This job runs only when a previous job fails
-    steps:
-      - name: Send Slack Notification
-        run: |
-          curl -X POST -H 'Content-type: application/json' \
-          --data '{
-            "text": "🚨 A job in the *${{ github.workflow }}* workflow failed!\nJob: *${{ job.name }}*\nRepository: *${{ github.repository }}*\n<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View details here>."
-          }' \
-          ${{ secrets.SLACK_WEBHOOK_URL }}
-
