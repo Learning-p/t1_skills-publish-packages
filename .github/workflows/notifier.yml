@@ -15,5 +15,5 @@ jobs:
       - name: Notify Slack
         run: |
           curl -X POST -H 'Content-type: application/json' \
-          --data '{"text": "🚨 Workflow *${{ github.workflow }}* in repository *${{ github.repository }}* failed.\n<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View details here>."}' \
+          --data '{"text": "🚨 Workflow 'Publish to Docker' in repository *${{ github.repository }}* failed.\n<https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}|View details here>."}' \
           ${{ secrets.SLACK_WEBHOOK_URL }}
